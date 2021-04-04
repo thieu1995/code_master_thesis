@@ -230,8 +230,8 @@ class ModelConfig:
         # "max_cluster": [1000, ],
         # "mutation_id": [0, ],
         "stimulation_level": [0.15, 0.25],
-        "positive_number": [0.01, 0.02],
-        "distance_level": [0.4, 0.5],
+        "positive_number": [0.01],
+        "distance_level": [0.5],
         "max_cluster": [1000, ],
         "mutation_id": [0, ],
     }

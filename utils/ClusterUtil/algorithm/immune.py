@@ -83,7 +83,7 @@ class ImmuneInspiration(RootCluster):
                     print("==== Over the number of clusters allowable =====")
                     break
         self.n_clusters = len(list_clusters)
-        print(f"n-clusters: {self.n_clusters}")
+        # print(f"n-clusters: {self.n_clusters}")
         self.centers = deepcopy(centers)
         self.list_clusters = deepcopy(list_clusters)
         self.labels = deepcopy(reshape(y_pred, (-1, 1)))

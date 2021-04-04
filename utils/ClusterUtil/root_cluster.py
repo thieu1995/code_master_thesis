@@ -121,7 +121,7 @@ class RootCluster(object):
             labels[i] = list_dist_mj[0][0]  # c: Index of hidden unit cth which make the distance minimum
 
         self.n_clusters = len(list_clusters)
-        print(f"n-cluster after mutation: {self.n_clusters}")
+        #print(f"n-cluster after mutation: {self.n_clusters}")
         self.centers = deepcopy(centers)
         self.list_clusters = deepcopy(list_clusters)
         self.labels = deepcopy(reshape(labels, (-1, 1)))
