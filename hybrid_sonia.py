@@ -54,27 +54,23 @@ def setting_and_running(my_model):
 
 models = [
     {"name": "GA-SSNN", "class": "GaSonia", "param_grid": getattr(ModelConfig, "ga_paras")},
-    {"name": "DE-SSNN", "class": "DeSonia", "param_grid": getattr(ModelConfig, "de_paras")},
-    {"name": "CRO-SSNN", "class": "CroSonia", "param_grid": getattr(ModelConfig, "cro_paras")},
+    {"name": "OCRO-SSNN", "class": "CroSonia", "param_grid": getattr(ModelConfig, "cro_paras")},
 
     {"name": "PSO-SSNN", "class": "PsoSonia", "param_grid": getattr(ModelConfig, "pso_paras")},
     {"name": "WOA-SSNN", "class": "WoaSonia", "param_grid": getattr(ModelConfig, "woa_paras")},
-    {"name": "HHO-SSNN", "class": "HhoSonia", "param_grid": getattr(ModelConfig, "hho_paras")},
 
-    {"name": "MVO-SSNN", "class": "MvoSonia", "param_grid": getattr(ModelConfig, "mvo_paras")},
-    {"name": "TWO-SSNN", "class": "TwoSonia", "param_grid": getattr(ModelConfig, "two_paras")},
+    {"name": "OTWO-SSNN", "class": "TwoSonia", "param_grid": getattr(ModelConfig, "two_paras")},
     {"name": "EO-SSNN", "class": "EoSonia", "param_grid": getattr(ModelConfig, "eo_paras")},
 
     {"name": "TLO-SSNN", "class": "TloSonia", "param_grid": getattr(ModelConfig, "tlo_paras")},
-    {"name": "QSA-SSNN", "class": "QsaSonia", "param_grid": getattr(ModelConfig, "qsa_paras")},
 
-    {"name": "IWO-SSNN", "class": "IwoSonia", "param_grid": getattr(ModelConfig, "iwo_paras")},
     {"name": "SMA-SSNN", "class": "SmaSonia", "param_grid": getattr(ModelConfig, "sma_paras")},
 
-    {"name": "AEO-SSNN", "class": "AeoSonia", "param_grid": getattr(ModelConfig, "aeo_paras")},
     {"name": "SCA-SSNN", "class": "ScaSonia", "param_grid": getattr(ModelConfig, "sca_paras")},
     {"name": "HS-SSNN", "class": "HsSonia", "param_grid": getattr(ModelConfig, "hs_paras")},
 
+    {"name": "AEO-SSNN", "class": "AeoSonia", "param_grid": getattr(ModelConfig, "aeo_paras")},
+    {"name": "IAEO-SSNN", "class": "ImprovedAeoSonia", "param_grid": getattr(ModelConfig, "aeo_paras")},
 ]
 
 if __name__ == '__main__':

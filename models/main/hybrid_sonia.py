@@ -232,6 +232,17 @@ class AeoSonia(RootHybridSoniaSsnn):
         self.solution, self.best_fit, self.loss_train = self.optimizer.train()
 
 
+class ImprovedAeoSonia(RootHybridSoniaSsnn):
+    def __init__(self, root_base_paras=None, root_hybrid_ssnn_paras=None, sonia_paras=None, mha_paras=None):
+        super().__init__(root_base_paras, root_hybrid_ssnn_paras, sonia_paras)
+        self.epoch = mha_paras["epoch"]
+        self.pop_size = mha_paras["pop_size"]
+        self.filename = f"{self.filename}-{self.epoch}-{self.pop_size}"
+
+    def training(self):
+        self.optimizer = AEO.AdaptiveAEO(self.objective_function, self.lb, self.ub, self.verbose, self.epoch, self.pop_size)
+        self.solution, self.best_fit, self.loss_train = self.optimizer.train()
+
 #####=============================== Math-based ================================================
 
 class ScaSonia(RootHybridSoniaSsnn):
