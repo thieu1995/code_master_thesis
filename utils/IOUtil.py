@@ -7,7 +7,7 @@
 #       Github:     https://github.com/thieunguyen5991                                                  %
 #-------------------------------------------------------------------------------------------------------%
 
-from numpy import array
+from numpy import array, reshape, savetxt
 from csv import DictWriter
 from pathlib import Path
 from pandas import read_csv, DataFrame
@@ -61,3 +61,8 @@ def load_csv(path_to_data=None, cols=None):
 	"""
 	df = read_csv(f"{path_to_data}.csv", usecols=cols)
 	return df.values
+
+
+def save_number_of_vms(data=None, pathfile=None):
+	t0 = reshape(data, (-1, 1))
+	savetxt(pathfile, t0, delimiter=",")
