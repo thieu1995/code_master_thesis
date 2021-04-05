@@ -89,7 +89,7 @@ class RootHybridSsnnBase(RootBase):
         filename_pred_train = f"{Config.FILENAME_PRED_TRAIN}-{self.filename}"
         save_to_csv_dict(data, filename_pred_train, pathsave_model)
 
-        data = {key: results[key] for key in Config.HEADER_TRAIN_CSV}
+        data = {key: results[key] for key in Config.HEADER_TEST_CSV}
         filename_pred_test = f"{Config.FILENAME_PRED_TEST}-{self.filename}"
         save_to_csv_dict(data, filename_pred_test, pathsave_model)
 

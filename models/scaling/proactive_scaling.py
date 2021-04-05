@@ -8,7 +8,7 @@
 # ------------------------------------------------------------------------------------------------------%
 
 from models.scaling.strategy_base import BaseStrategy
-from numpy import ceil, zeros, array, reshape, max, concatenate
+from numpy import ceil, zeros, array, reshape, max, concatenate, sum
 from utils.IOUtil import load_csv
 
 
@@ -106,8 +106,10 @@ class SLABasedOnVms(BaseStrategy):
         return float(len(e[e == True])) * 100 / len(e), (cpu_alloc, ram_alloc, number_of_VMs)
 
     def get_predicted_and_allocated_vms(self, cpu_file, ram_file):
-        cpu_actual, cpu_predict = load_csv(cpu_file)
-        ram_actual, ram_predict = load_csv(ram_file)
+        cpu_loaded = load_csv(cpu_file)
+        ram_loaded = load_csv(ram_file)
+        cpu_actual, cpu_predict = cpu_loaded[:, 0:1], cpu_loaded[:, 1:2]
+        ram_actual, ram_predict = ram_loaded[:, 0:1], ram_loaded[:, 1:2]
 
         resources_actuals = concatenate((cpu_actual, ram_actual), axis=1)
         resources_predicts = concatenate((cpu_predict, ram_predict), axis=1)

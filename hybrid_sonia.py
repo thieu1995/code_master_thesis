@@ -52,31 +52,10 @@ def setting_and_running(my_model):
                             md.processing()
 
 
-models = [
-    {"name": "GA-SSNN", "class": "GaSonia", "param_grid": getattr(ModelConfig, "ga_paras")},
-    {"name": "OCRO-SSNN", "class": "CroSonia", "param_grid": getattr(ModelConfig, "cro_paras")},
-
-    {"name": "PSO-SSNN", "class": "PsoSonia", "param_grid": getattr(ModelConfig, "pso_paras")},
-    {"name": "WOA-SSNN", "class": "WoaSonia", "param_grid": getattr(ModelConfig, "woa_paras")},
-
-    {"name": "OTWO-SSNN", "class": "TwoSonia", "param_grid": getattr(ModelConfig, "two_paras")},
-    {"name": "EO-SSNN", "class": "EoSonia", "param_grid": getattr(ModelConfig, "eo_paras")},
-
-    {"name": "TLO-SSNN", "class": "TloSonia", "param_grid": getattr(ModelConfig, "tlo_paras")},
-
-    {"name": "SMA-SSNN", "class": "SmaSonia", "param_grid": getattr(ModelConfig, "sma_paras")},
-
-    {"name": "SCA-SSNN", "class": "ScaSonia", "param_grid": getattr(ModelConfig, "sca_paras")},
-    {"name": "HS-SSNN", "class": "HsSonia", "param_grid": getattr(ModelConfig, "hs_paras")},
-
-    {"name": "AEO-SSNN", "class": "AeoSonia", "param_grid": getattr(ModelConfig, "aeo_paras")},
-    {"name": "IAEO-SSNN", "class": "ImprovedAeoSonia", "param_grid": getattr(ModelConfig, "aeo_paras")},
-]
-
 if __name__ == '__main__':
     starttime = time()
     processes = []
-    for my_md in models:
+    for my_md in ModelConfig.MHA_SSNN_MODELS:
         p = multiprocessing.Process(target=setting_and_running, args=(my_md,))
         processes.append(p)
         p.start()

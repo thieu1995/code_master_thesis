@@ -66,3 +66,13 @@ def load_csv(path_to_data=None, cols=None):
 def save_number_of_vms(data=None, pathfile=None):
 	t0 = reshape(data, (-1, 1))
 	savetxt(pathfile, t0, delimiter=",")
+
+
+def save_scaling_results_to_csv(data=None, path_file=None):
+	savetxt(path_file + ".csv", array(data), delimiter=",")
+	return None
+
+
+def load_number_of_vms(pathfile=None, delimiter=",", header=None):
+	df = read_csv(pathfile, sep=delimiter, header=header)
+	return df.values[:, 0:1]

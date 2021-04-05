@@ -51,6 +51,9 @@ class Config:
     FILE_MAX = "max.csv"
     FILE_STD = "std.csv"
     FILE_CV = "cv.csv"
+    FILE_VMS_REAL_USAGE = "vms_real_used_CPU_RAM.csv"
+    FILE_SLA_VIOLATE = "sla_violate"
+    FILE_QOS_VIOLATE = "qos_adi"
 
     VISUALIZE_TYPES = [".png", ".pdf"]
 
@@ -449,6 +452,26 @@ class ModelConfig:
         "pa_r": [0.05]
     }
 
+    MHA_SSNN_MODELS = [
+        {"name": "GA-SSNN", "class": "GaSonia", "param_grid": ga_paras},
+        {"name": "OCRO-SSNN", "class": "CroSonia", "param_grid": cro_paras},
+
+        {"name": "PSO-SSNN", "class": "PsoSonia", "param_grid": pso_paras},
+        {"name": "WOA-SSNN", "class": "WoaSonia", "param_grid": woa_paras},
+
+        {"name": "OTWO-SSNN", "class": "TwoSonia", "param_grid": two_paras},
+        {"name": "EO-SSNN", "class": "EoSonia", "param_grid": eo_paras},
+
+        {"name": "TLO-SSNN", "class": "TloSonia", "param_grid": tlo_paras},
+
+        {"name": "SMA-SSNN", "class": "SmaSonia", "param_grid": sma_paras},
+
+        {"name": "SCA-SSNN", "class": "ScaSonia", "param_grid": sca_paras},
+        {"name": "HS-SSNN", "class": "HsSonia", "param_grid": hs_paras},
+
+        {"name": "AEO-SSNN", "class": "AeoSonia", "param_grid": aeo_paras},
+        {"name": "IAEO-SSNN", "class": "ImprovedAeoSonia", "param_grid": aeo_paras},
+    ]
 
 
 

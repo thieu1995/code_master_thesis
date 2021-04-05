@@ -19,7 +19,7 @@ def get_real_vms_usages(cpu, ram, broker):
 
     resources_actual = concatenate((cpu_loaded[:, 0:1], ram_loaded[:, 0:1]), axis=1)
     number_of_VMs = array(broker.allocate_VMs(resources_usage=resources_actual))
-    save_number_of_vms(number_of_VMs, "vms_real_used_CPU_RAM.csv")
+    save_number_of_vms(number_of_VMs, Config.FILE_VMS_REAL_USAGE)
 
 
 broker = BrokerScaling()
