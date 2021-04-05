@@ -43,7 +43,7 @@ class Config:
     FILENAME_LOSS_TRAIN = "loss_train"
     FILENAME_PRED_TRAIN = "pred_train"
     FILENAME_PRED_TEST = "pred_test"
-    FILENAME_METRICS = "metrics"
+    FILENAME_METRICS = "resources"
     FILENAME_STATISTICS = "statistics"
     FILENAME_MODEL = "model"
     FILE_MIN = "min.csv"

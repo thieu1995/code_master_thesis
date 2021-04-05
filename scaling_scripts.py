@@ -10,7 +10,6 @@
 from sklearn.model_selection import ParameterGrid
 from models.scaling.proactive_scaling import SLABasedOnVms as BrokerScaling
 from utils.IOUtil import load_csv, save_scaling_results_to_csv, load_number_of_vms
-from utils.ScalingUtil import ADI
 from config import Config, ModelConfig
 from numpy import array, sum, round
 
@@ -25,11 +24,9 @@ def calculate_adi_sla(cpu_path, ram_path, filename):
         violated_arr = []
         adi_arr = []
         for L_adap in L_adaps:
-            broker = BrokerScaling(scaling_coefficient=s_coff, adaptation_len=L_adap)
-            neural_net = broker.sla_violate(cpu_file, ram_file)
-            eval_scaler = ADI(lower_bound=0.6, upper_bound=0.8, metric='CPU Utilisation %')
-            adi = sum(array(eval_scaler.calculate_ADI(resource_used=resource_real_used, resource_allocated=neural_net[1][-1])))
-
+            broker = BrokerScaling(scaling_factor=s_coff, adaptation_len=L_adap)
+            neural_net = broker.sla_violate([cpu_file, ram_file])
+            adi = broker.adi_qos_calculation(bound=(0.6, 0.8), resource_used=resource_real_used, resource_allocated=neural_net[1][-1])
             violated_arr.append(round(neural_net[0], 2))
             adi_arr.append(round(adi, 2))
 

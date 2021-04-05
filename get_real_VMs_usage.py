@@ -7,7 +7,7 @@
 #       Github:     https://github.com/thieu1995                                                        %
 # ------------------------------------------------------------------------------------------------------%
 
-from models.scaling.reactivate_scaling import OnDemandScaling as BrokerScaling
+from models.scaling.reactivate_scaling import DemandScalingBasedOnResources as BrokerScaling
 from utils.IOUtil import load_csv, save_number_of_vms
 from numpy import array, concatenate
 from config import Config
@@ -18,7 +18,7 @@ def get_real_vms_usages(cpu, ram, broker):
     ram_loaded = load_csv(ram, cols=[2, 3])
 
     resources_actual = concatenate((cpu_loaded[:, 0:1], ram_loaded[:, 0:1]), axis=1)
-    number_of_VMs = array(broker.allocate_VMs(resources_usage=resources_actual))
+    number_of_VMs = array(broker.calculate_VMs_allocated(resources_usage=resources_actual))
     save_number_of_vms(number_of_VMs, Config.FILE_VMS_REAL_USAGE)
 
 
