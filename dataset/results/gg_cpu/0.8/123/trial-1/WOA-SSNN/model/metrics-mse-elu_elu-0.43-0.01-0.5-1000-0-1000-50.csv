@@ -1,0 +1,2 @@
+model_name,time_train,time_predict,time_total,n_clusters,silhouette,calinski,davies,MAE_train,RMSE_train,MAPE_train,EVS_train,R2_train,NSE_train,R_train,WI_train,CI_train,MAE_test,RMSE_test,MAPE_test,EVS_test,R2_test,NSE_test,R_test,WI_test,CI_test
+mse-elu_elu-0.43-0.01-0.5-1000-0-1000-50,505.6637,0.00860834,509.1855,12,0.238,2356.58,0.843,0.705,2.844,57.733,-0.293,-0.293,-0.293,0.726,0.618,0.449,0.343,0.578,38.131,-0.198,-0.231,-0.231,0.45,0.51,0.23
