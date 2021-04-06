@@ -51,7 +51,7 @@ class Config:
     FILE_MAX = "max.csv"
     FILE_STD = "std.csv"
     FILE_CV = "cv.csv"
-    FILE_VMS_REAL_USAGE = "vms_real_used_CPU_RAM.csv"
+    FILE_VMS_REAL_USAGE = "VMS_real.csv"
     FILE_SLA_VIOLATE = "sla_violate"
     FILE_QOS_VIOLATE = "qos_adi"
 
@@ -276,7 +276,7 @@ class ModelConfig:
         "Pd": [0.1],
         "G": [(0.02, 0.2)],
         "GCR": [0.1],
-        "k": [3],
+        # "k": [3],
 
     }
     ## Swarm-based group

@@ -35,8 +35,8 @@ class BaseStrategy:
             lv = util_level - bound[1]
         return lv
 
-    def adi_qos_calculation(self, bound=(0.5, 0.8), resource_used=None, resource_allocated=None):
-        time_used = concatenate((resource_used, resource_allocated), axis=1)
+    def adi_qos_calculation(self, bound=(0.5, 0.8), VMs_used=None, VMs_allocated=None):
+        time_used = concatenate((VMs_used, VMs_allocated), axis=1)
         adi_list = []
         for w, m in time_used:
             util_level = self.__util_level__(w, m)

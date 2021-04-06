@@ -8,7 +8,8 @@
 # ------------------------------------------------------------------------------------------------------%
 
 from models.scaling.base_strategy import BaseStrategy
-from numpy import ceil, zeros, array, reshape, max, sum
+from numpy import ceil, zeros, array, reshape, sum
+from numpy import max as np_max
 from utils.IOUtil import load_csv
 
 
@@ -80,43 +81,41 @@ class SLABasedOnVms(BaseStrategy):
         vms_actuals = ceil(resource_actuals / self.VM_capacity)
         vms_predicts = ceil(resource_predicts / self.VM_capacity)
 
-        vms_actual = reshape(max(vms_actuals, axis=1), (-1, 1))
-        vms_predict = reshape(max(vms_predicts, axis=1), (-1, 1))
+        vms_actual = reshape(np_max(vms_actuals, axis=1), (-1, 1))
+        vms_predict = reshape(np_max(vms_predicts, axis=1), (-1, 1))
 
         vms_allocated = zeros(shape=vms_actual.shape)
         vms_allocated[:self.adap_len] = vms_actual[:self.adap_len]
 
         for idx in range(self.adap_len, len(vms_actual)):
+            # list_violated = [max(0, (vms_actual[i] - vms_predict[i])) for i in range(idx - self.adap_len, idx)]
+
             vms_allocated[idx] = self.scaling_factor * vms_predict[idx] + (1.0 / self.adap_len) * \
                                  sum([max(0, (vms_actual[i] - vms_predict[i])) for i in range(idx - self.adap_len, idx)])
         return reshape(ceil(vms_allocated), (-1, 1))
 
-    def sla_violate(self, list_resource_files=None):
+    def __get_resources__(self, list_resource_files:list, list_cols:list):
         resource_actuals = []
         resource_predicts = []
-        for resource_file in list_resource_files:
-            res_loaded = load_csv(resource_file)
+        for idx, resource_file in enumerate(list_resource_files):
+            res_loaded = load_csv(resource_file, cols=list_cols[idx])
             res_true, res_pred = res_loaded[:, 0], res_loaded[:, 1]
             resource_actuals.append(res_true)
             resource_predicts.append(res_pred)
         resource_actuals = array(resource_actuals).T
         resource_predicts = array(resource_predicts).T
+        return resource_actuals, resource_predicts
+
+    def sla_violate(self, list_resource_files=None, list_cols=None):
+        resource_actuals, resource_predicts = self.__get_resources__(list_resource_files, list_cols)
         number_of_VMs = self.calculate_VMs_allocated(resource_actuals=resource_actuals, resource_predicts=resource_predicts)
 
         resource_allocated = number_of_VMs * self.VM_capacity
         violated_list_boolean = (resource_actuals >= resource_allocated).any(axis=1)
         return sum(violated_list_boolean) / len(violated_list_boolean), (resource_allocated, number_of_VMs)
 
-    def get_predicted_and_allocated_vms(self, list_resource_files=None):
-        resource_actuals = []
-        resource_predicts = []
-        for resource_file in list_resource_files:
-            res_loaded = load_csv(resource_file)
-            res_true, res_pred = res_loaded[:, 0], res_loaded[:, 1]
-            resource_actuals.append(res_true)
-            resource_predicts.append(res_pred)
-        resource_actuals = array(resource_actuals).T
-        resource_predicts = array(resource_predicts).T
+    def get_predicted_and_allocated_vms(self, list_resource_files=None, list_cols=None):
+        resource_actuals, resource_predicts = self.__get_resources__(list_resource_files, list_cols)
 
         vms_actuals = ceil(resource_actuals / self.VM_capacity)
         vms_predicts = ceil(resource_predicts / self.VM_capacity)

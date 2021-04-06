@@ -11,10 +11,10 @@ from sklearn.model_selection import ParameterGrid
 from models.scaling.proactive_scaling import SLABasedOnVms as BrokerScaling
 from utils.IOUtil import load_csv, save_scaling_results_to_csv, load_number_of_vms
 from config import Config, ModelConfig
-from numpy import array, sum, round
+from numpy import array, sum, round, sqrt
 
 
-def calculate_adi_sla(cpu_path, ram_path, filename):
+def calculate_adi_sla(cpu_path, ram_path, filename, real_VMs_used):
     cpu_file = f"{cpu_path}/{filename}"
     ram_file = f"{ram_path}/{filename}"
     violated_arrays = []
@@ -25,8 +25,8 @@ def calculate_adi_sla(cpu_path, ram_path, filename):
         adi_arr = []
         for L_adap in L_adaps:
             broker = BrokerScaling(scaling_factor=s_coff, adaptation_len=L_adap)
-            neural_net = broker.sla_violate([cpu_file, ram_file])
-            adi = broker.adi_qos_calculation(bound=(0.6, 0.8), resource_used=resource_real_used, resource_allocated=neural_net[1][-1])
+            neural_net = broker.sla_violate(list_resource_files=[cpu_file, ram_file], list_cols=[[2, 3], [2, 3]])
+            adi = broker.adi_qos_calculation(bound=(0.6, 0.8), VMs_used=real_VMs_used, VMs_allocated=neural_net[1][-1])
             violated_arr.append(round(neural_net[0], 2))
             adi_arr.append(round(adi, 2))
 
@@ -43,15 +43,16 @@ def calculate_adi_sla(cpu_path, ram_path, filename):
 s_coffs = [1.0, 1.3, 1.5, 1.7, 2.0, 2.2, 2.5]
 L_adaps = [5]
 
-resource_real_used = load_number_of_vms(Config.FILE_VMS_REAL_USAGE)
 for model in ModelConfig.MHA_SSNN_MODELS:
 
     for idx_windows, windows in enumerate(Config.DATASET_WINDOWS[0]):
+        real_VMs_used = load_number_of_vms(f"{Config.DATA_RESULTS}/slide{len(windows)}-{Config.FILE_VMS_REAL_USAGE}")
         for idx_train_rate, train_rate in enumerate(Config.TRAIN_SPLITS):
             for n_trial in range(Config.N_TRIALS):
 
                 # Create a combination of hybrid SONIA parameters
                 for sp in list(ParameterGrid(ModelConfig.HYBRID_SONIA_PARAS)):
+                    sp["stimulation_level"] = round(sqrt(len(windows)) * sp["stimulation_level"], 2)
                     filename1 = f"{Config.METRICS_TRAINING}-{'_'.join(sp['activations'])}-{sp['stimulation_level']}-{sp['positive_number']}-{sp['distance_level']}-{sp['max_cluster']}-{sp['mutation_id']}"
                     # Create combination of algorithm parameters
                     for mha_paras in list(ParameterGrid(model["param_grid"])):
@@ -59,7 +60,7 @@ for model in ModelConfig.MHA_SSNN_MODELS:
                         filename = f"{Config.FILENAME_PRED_TEST}-{filename1}-{filename2}"
                         cpu_path = f"{Config.DATA_RESULTS}/gg_cpu/{train_rate}/{''.join([str(x) for x in windows])}/trial-{n_trial}/{model['name']}/{Config.FILENAME_MODEL}"
                         ram_path = f"{Config.DATA_RESULTS}/gg_ram/{train_rate}/{''.join([str(x) for x in windows])}/trial-{n_trial}/{model['name']}/{Config.FILENAME_MODEL}"
-                        calculate_adi_sla(cpu_path, ram_path, filename)
+                        calculate_adi_sla(cpu_path, ram_path, filename, real_VMs_used)
 
 
 
