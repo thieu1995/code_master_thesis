@@ -107,7 +107,7 @@ class Gru(RootRnn):
 class Cnn(RootRnn):
 	def __init__(self, root_base_paras=None, root_rnn_paras=None, cnn_paras=None):
 		super().__init__(root_base_paras, root_rnn_paras)
-		self.filter_size = cnn_paras["filters_size"]
+		self.filter_size = cnn_paras["filter_size"]
 		self.kernel_size = cnn_paras["kernel_size"]
 		self.pool_size = cnn_paras["pool_size"]
 		self.activation = cnn_paras["activation"]
