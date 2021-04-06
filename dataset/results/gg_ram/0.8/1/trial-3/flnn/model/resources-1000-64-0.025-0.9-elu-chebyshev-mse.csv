@@ -1,0 +1,2 @@
+model_name,time_train,time_predict,time_total,MAE_train,RMSE_train,MAPE_train,EVS_train,R2_train,NSE_train,R_train,WI_train,CI_train,MAE_test,RMSE_test,MAPE_test,EVS_test,R2_test,NSE_test,R_test,WI_test,CI_test
+1000-64-0.025-0.9-elu-chebyshev-mse,105.207,0.02280426,105.6016,0.04,0.109,12.228,0.914,0.914,0.914,0.959,0.977,0.937,0.02,0.034,8.735,0.701,0.701,0.701,0.876,0.911,0.798

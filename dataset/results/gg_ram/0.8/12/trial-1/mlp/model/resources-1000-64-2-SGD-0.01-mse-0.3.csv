@@ -1,0 +1,2 @@
+model_name,time_train,time_predict,time_total,MAE_train,RMSE_train,MAPE_train,EVS_train,R2_train,NSE_train,R_train,WI_train,CI_train,MAE_test,RMSE_test,MAPE_test,EVS_test,R2_test,NSE_test,R_test,WI_test,CI_test
+1000-64-2-SGD-0.01-mse-0.3,232.579,0.58859015,233.4701,0.126,0.376,34.948,-0.014,-0.026,-0.026,0.879,0.079,0.069,0.044,0.063,20.099,-0.009,-0.035,-0.035,0.721,0.159,0.115

@@ -1,0 +1,2 @@
+model_name,time_train,time_predict,time_total,MAE_train,RMSE_train,MAPE_train,EVS_train,R2_train,NSE_train,R_train,WI_train,CI_train,MAE_test,RMSE_test,MAPE_test,EVS_test,R2_test,NSE_test,R_test,WI_test,CI_test
+1000-64-2-Adam-0.01-mse-0.3,266.7775,0.64532804,267.6986,0.057,0.164,17.248,0.816,0.803,0.803,0.917,0.935,0.857,0.044,0.054,19.222,0.708,0.231,0.231,0.873,0.796,0.695

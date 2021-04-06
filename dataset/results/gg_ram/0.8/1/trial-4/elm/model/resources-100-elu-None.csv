@@ -1,0 +1,2 @@
+model_name,time_train,time_predict,time_total,MAE_train,RMSE_train,MAPE_train,EVS_train,R2_train,NSE_train,R_train,WI_train,CI_train,MAE_test,RMSE_test,MAPE_test,EVS_test,R2_test,NSE_test,R_test,WI_test,CI_test
+100-elu-None,0.3037,0.09729886,0.725,0.04,0.108,12.603,0.915,0.915,0.915,0.959,0.977,0.937,0.021,0.034,9.295,0.689,0.688,0.688,0.876,0.913,0.8
