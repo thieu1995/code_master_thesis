@@ -55,7 +55,7 @@ for idx_file, data_filename in enumerate(Config.DATASET_NAMES):
         for idx_train_rate, train_rate in enumerate(Config.TRAIN_SPLITS):
             for n_trial in range(Config.N_TRIALS):
                 # Create combination of params.
-                for item in list(ParameterGrid(ModelConfig.flnn)):
+                for item in list(ParameterGrid(ModelConfig.cnn)):
                     train_model(item)
 end_time = time() - start_time
 print("Taken: {} seconds".format(end_time))
