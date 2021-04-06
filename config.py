@@ -215,7 +215,7 @@ class ModelConfig:
                 {"n_nodes": 1, "activation": "sigmoid"}  # Output layer
             ],
         ],
-        "filters_size": [64, ],
+        "filter_size": [64, ],
         "kernel_size": [2, ],
         "pool_size": [2, ],
         "activation": ["relu"]
