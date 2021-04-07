@@ -17,7 +17,7 @@
 - RNN : Recurrent Neural Network
 - LSTM: Long Short Term Memory
 - GRU: Gate Recurrent Unit
-- CNN: Convolutional Neural Network
+- CNN: Convolutional Neural Network - Run with sliding window > 3 only.
 
 2. Hybrid models
 - All models above, except SVR and ELM, can you to hybrid with meta-heuristic algorithm. Meaning that instead of

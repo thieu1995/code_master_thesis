@@ -28,14 +28,14 @@ class Config:
     DATASET_COLUMNS = [[1], [2]]
     DATASET_WINDOWS = [
         [
-            [1],
-            [1, 2],
-            [1, 2, 3],
+            [1, 2, 3, 4],
+            [1, 2, 3, 4, 5],
+            [1, 2, 3, 4, 5, 6],
         ],
         [
-            [1],
-            [1, 2],
-            [1, 2, 3],
+            [1, 2, 3, 4],
+            [1, 2, 3, 4, 5],
+            [1, 2, 3, 4, 5, 6],
         ],
     ]
 
@@ -71,6 +71,17 @@ class Config:
 
     HEADER_TRAIN_CSV = ["y_train_true_scaled", "y_train_pred_scaled", "y_train_true_unscaled", "y_train_pred_unscaled"]
     HEADER_TEST_CSV = ["y_test_true_scaled", "y_test_pred_scaled", "y_test_true_unscaled", "y_test_pred_unscaled"]
+
+    FILE_METRIC_CSV_HEADER = ["model_name", "time_train", "time_predict", "time_total", "n_clusters", "silhouette", "calinski",
+              "davies", "MAE_train", "RMSE_train", "MAPE_train", "EVS_train",
+              "R2_train", "NSE_train", "R_train", "WI_train", "CI_train",
+              "MAE_test", "RMSE_test", "MAPE_test", "EVS_test", "R2_test", "NSE_test", "R_test", "WI_test", "CI_test"]
+    FILE_METRIC_CSV_HEADER_FULL = ["windows", "train_rate", "trial", "model",
+        "model_name", "time_train", "time_predict", "time_total", "n_clusters", "silhouette", "calinski",
+        "davies", "MAE_train", "RMSE_train", "MAPE_train", "EVS_train",
+        "R2_train", "NSE_train", "R_train", "WI_train", "CI_train",
+        "MAE_test", "RMSE_test", "MAPE_test", "EVS_test", "R2_test", "NSE_test", "R_test", "WI_test", "CI_test"
+    ]
 
     N_TRIALS = 5
     TRAIN_SPLITS = [0.8]
