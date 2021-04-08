@@ -27,8 +27,8 @@ def calculate_adi_sla(cpu_path, ram_path, filename, real_VMs_used):
             broker = BrokerScaling(scaling_factor=s_coff, adaptation_len=L_adap)
             neural_net = broker.sla_violate(list_resource_files=[cpu_file, ram_file], list_cols=[[2, 3], [2, 3]])
             adi = broker.adi_qos_calculation(bound=(0.6, 0.8), VMs_used=real_VMs_used, VMs_allocated=neural_net[1][-1])
-            violated_arr.append(round(neural_net[0], 2))
-            adi_arr.append(round(adi, 2))
+            violated_arr.append(round(neural_net[0], 3))
+            adi_arr.append(round(adi, 3))
 
         violated_arrays.append(violated_arr)
         adi_arrays.append(adi_arr)
@@ -40,8 +40,8 @@ def calculate_adi_sla(cpu_path, ram_path, filename, real_VMs_used):
     save_scaling_results_to_csv(adi_arrays, adi_path_file)
 
 
-s_coffs = [1.0, 1.3, 1.5, 1.7, 2.0, 2.2, 2.5]
-L_adaps = [5]
+s_coffs = [0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5]
+L_adaps = [1, 2, 3, 6, 12, 24]
 
 for model in ModelConfig.MHA_SSNN_MODELS:
 
@@ -61,6 +61,3 @@ for model in ModelConfig.MHA_SSNN_MODELS:
                         cpu_path = f"{Config.DATA_RESULTS}/gg_cpu/{train_rate}/{''.join([str(x) for x in windows])}/trial-{n_trial}/{model['name']}/{Config.FILENAME_MODEL}"
                         ram_path = f"{Config.DATA_RESULTS}/gg_ram/{train_rate}/{''.join([str(x) for x in windows])}/trial-{n_trial}/{model['name']}/{Config.FILENAME_MODEL}"
                         calculate_adi_sla(cpu_path, ram_path, filename, real_VMs_used)
-
-
-
