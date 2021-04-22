@@ -113,6 +113,40 @@ def draw_predict_line_with_error(data:list, error:list, filename:str, pathsave:s
     return None
 
 
+def draw_predict(y_test=None, y_pred=None, filename=None, pathsave=None):
+    plt.plot(y_test)
+    plt.plot(y_pred)
+    plt.ylabel('CPU')
+    plt.xlabel('Timestamp')
+    plt.legend(['Actual', 'Predict'], loc='upper right')
+    plt.savefig(pathsave + filename + ".png")
+    plt.close()
+    return None
+
+
+def draw_true_predict(data: list, title:str, legends: list, coordinate_titles:list, filename: str, pathsave: str, exts: list):
+    Path(pathsave).mkdir(parents=True, exist_ok=True)
+    plt.plot(data[0], linestyle='-')
+    plt.plot(data[1], linestyle='--')
+    plt.ylabel(coordinate_titles[1])
+    plt.xlabel(coordinate_titles[0])
+    plt.title(title)
+    plt.legend(legends, loc='upper right')
+    plt.savefig(pathsave + filename + ".png")
+
+    for idx, ext in enumerate(exts):
+        plt.savefig(f"{pathsave}/{filename}{ext}", bbox_inches='tight')
+    # if platform.system() != "Linux":
+    # plt.show()
+    plt.close()
+
+    # # plt.tight_layout()
+    # plt.savefig(pathsave + filename + ".png", bbox_inches='tight')
+    # # plt.show()
+    # plt.close()
+    return None
+
+
 def __create_time_steps__(length):
     return list(range(-length, 0))
 
