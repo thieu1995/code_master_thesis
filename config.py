@@ -49,7 +49,7 @@ class Config:
     FILENAME_LOSS_TRAIN = "loss_train"
     FILENAME_PRED_TRAIN = "pred_train"
     FILENAME_PRED_TEST = "pred_test"
-    FILENAME_METRICS = "resources"
+    FILENAME_METRICS = "metrics"
     FILENAME_STATISTICS = "statistics"
     FILENAME_MODEL = "model"
     FILE_MIN = "min.csv"
@@ -95,7 +95,7 @@ class Config:
     VISUALIZE = True
     NETWORK_2D = "2D"
     NETWORK_3D = "3D"
-    VERBOSE = 0  # 0: nothing, 1 : full detail, 2: short version
+    VERBOSE = 1  # 0: nothing, 1 : full detail, 2: short version
     SAVE_MODEL = False
 
     MODEL_KERAS = ["mlp", "rnn", "cnn", "gru", "lstm"]
@@ -257,6 +257,12 @@ class ModelConfig:
     }
 
     #### Hybrid SONIA
+    HYBRID_FLNN_PARAS = {
+        "lb": [[-1], ],
+        "ub": [[1], ],
+        "expand": ["chebyshev", "legendre"],  # chebyshev, legendre, laguerre, powerseries, trigonometric
+        "activation": ["elu", "relu"],
+    }
 
     HYBRID_SONIA_PARAS = {
         "activations": [("elu", "elu"), ],
@@ -490,6 +496,27 @@ class ModelConfig:
         {"name": "IAEO-SSNN", "class": "ImprovedAeoSonia", "param_grid": aeo_paras},
     ]
 
+
+    MHA_FLNN_MODELS = [
+        {"name": "GA-FLNN", "class": "GaFlnn", "param_grid": ga_paras},
+        {"name": "OCRO-FLNN", "class": "CroFlnn", "param_grid": cro_paras},
+
+        {"name": "PSO-FLNN", "class": "PsoFlnn", "param_grid": pso_paras},
+        {"name": "WOA-FLNN", "class": "WoaFlnn", "param_grid": woa_paras},
+
+        {"name": "OTWO-FLNN", "class": "TwoFlnn", "param_grid": two_paras},
+        {"name": "EO-FLNN", "class": "EoFlnn", "param_grid": eo_paras},
+
+        {"name": "TLO-FLNN", "class": "TloFlnn", "param_grid": tlo_paras},
+
+        {"name": "SMA-FLNN", "class": "SmaFlnn", "param_grid": sma_paras},
+
+        {"name": "SCA-FLNN", "class": "ScaFlnn", "param_grid": sca_paras},
+        {"name": "HS-FLNN", "class": "HsFlnn", "param_grid": hs_paras},
+
+        {"name": "AEO-FLNN", "class": "AeoFlnn", "param_grid": aeo_paras},
+        {"name": "IAEO-FLNN", "class": "ImprovedAeoFlnn", "param_grid": aeo_paras},
+    ]
 
 
 

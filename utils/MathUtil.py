@@ -96,3 +96,9 @@ def expand_trigonometric(x):
 	x4 = sin(3 * pi * x) + cos(3 * pi * x)
 	x5 = sin(4 * pi * x) + cos(4 * pi * x)
 	return concatenate((x1, x2, x3, x4, x5), axis=1)
+
+
+ELU = elu
+RELU = relu
+TANH = tanh
+SIGMOID = sigmoid
