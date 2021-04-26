@@ -21,7 +21,7 @@
     conda install -c conda-forge tensorflow
     conda install -c conda-forge keras
     
-    pip install git+ssh://git@github.com/thieu1995/permetrics.git
+    pip install --upgrade permetrics
     pip install git+ssh://git@github.com/thieu1995/mealpy.git
     pip install git+ssh://git@github.com/thieu1995/opfunu.git
     
